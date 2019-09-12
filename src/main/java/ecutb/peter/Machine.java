@@ -25,8 +25,10 @@ public class Machine implements VendingMachine{
     public Product request(int productNumber) {
         for (Product product: products){
             if(product.getProductNumber() == productNumber  ){
-                if(product.getPrice() <= moneyPool)
-                return product;
+                if(product.getPrice() <= moneyPool){
+                    moneyPool -= product.getPrice();//****
+                    return product;
+                }
                 else
                     System.out.println("you must deposit money ");
             }
@@ -38,10 +40,10 @@ public class Machine implements VendingMachine{
     @Override
     //Nollställa moneypool och returnera det som fanns tillbaka som en int
     public int endSession() {
-//        int index = -1;
-//        String [] proudcts = getProducts();
-//        for ()
-//        if(moneyPool > )
+        if(moneyPool > 0){
+            return moneyPool;
+        }
+        moneyPool = 0;
         return 0;
     }
 

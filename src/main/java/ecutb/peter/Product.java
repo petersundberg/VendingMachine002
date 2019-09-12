@@ -57,10 +57,10 @@ public abstract class Product {
 
     public String examine(){
         return "The product is: " +
-                "Price: " + getPrice() +
-                "Name: " + getName() +
-                "Calorie:" + getCalorie() +
-                "Allergens: " + getAllergens();
+                "\nPrice: " + getPrice() +
+                "\nName: " + getName() +
+                "\nCalorie: " + getCalorie() +
+                "\nAllergens: " + getAllergens();
     }
 
     public abstract String use(int productNumber);

@@ -4,9 +4,73 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MachineTest {
-//    @Test
-//    public void add_currency_test(){
-//        int expectedValue = 100;
-//        Assert.assertEquals(expectedValue, Machine);
-//}
+    static Product [] products = new Product[3];
+
+    @Test
+    public void add_currency_test(){
+        products[0]  = new Fruit(1, "Apple", 10, 100, "No allergen");
+        products[1]  = new Fruit(2, "Orange", 12, 110, "No allergen");
+        products[2]  = new Fruit(3, "Melon", 110, 100, "No allergen");
+        Machine machine = new Machine(products);
+        int expectedValue = 100;
+        machine.addCurrency(100);
+        Assert.assertEquals(expectedValue, machine.getBalance());
+
+        int expectedValue1 = 105;
+        machine.addCurrency(5);
+        Assert.assertEquals(expectedValue1, machine.getBalance());
+
+        int expectedVale2 = 105;
+        machine.addCurrency(2);
+        Assert.assertEquals(expectedVale2, machine.getBalance());
+}
+    @Test
+    public void test_request(){
+        products[0]  = new Fruit(1, "Apple", 10, 100, "No allergen");
+        products[1]  = new Fruit(2, "Orange", 12, 110, "No allergen");
+        products[2]  = new Fruit(3, "Melon", 110, 100, "No allergen");
+        Machine machine = new Machine(products);
+        machine.addCurrency(100);
+        int expectedValue1 = 90;
+        machine.request(1);
+        Assert.assertEquals(expectedValue1, machine.getBalance());
+//        Assert.assertNotNull(machine.request(1));
+//        Assert.assertNull(machine.request(4));
+
+        int expectedValue2 = 78;
+        machine.request(2);
+        Assert.assertEquals(expectedValue2, machine.getBalance());
+}
+
+@Test
+    public void test_end_session(){
+    products[0]  = new Fruit(1, "Apple", 10, 100, "No allergen");
+    products[1]  = new Fruit(2, "Orange", 12, 110, "No allergen");
+    products[2]  = new Fruit(3, "Melon", 110, 100, "No allergen");
+    Machine machine = new Machine(products);
+    machine.addCurrency(500);
+    machine.request(1);
+    machine.request(2);
+    int expectedValue1 = 478;
+    Assert.assertEquals(expectedValue1, machine.endSession());
+
+    Machine machine1 = new Machine(products);
+    machine1.addCurrency(10);
+    machine1.request(1);
+    int expectedValue2 = 0;
+    Assert.assertEquals(expectedValue2, machine1.endSession());
+}
+    @Test
+    public void test_examine(){
+        products[0]  = new Fruit(1, "Apple", 10, 100, "No allergen");
+        products[1]  = new Fruit(2, "Orange", 12, 110, "No allergen");
+        products[2]  = new Fruit(3, "Melon", 110, 100, "No allergen");
+        Machine machine = new Machine(products);
+
+        String expectedOutput1 ="The product is: \nPrice: 12\nName: Orange\nCalorie: 110\nAllergens: No allergen";
+        Assert.assertEquals(expectedOutput1, machine.getDescription(2).trim());
+
+        Assert.assertNull(machine.getDescription(5));
+    }
+
 }

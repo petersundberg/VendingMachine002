@@ -9,6 +9,6 @@ public class Dryck extends Product {
 
     @Override
     public String use(int productNumber) {
-        return productNumber + " is used";
+        return "The drink " + getName() + " is used " + "with " + productNumber;
     }
 }
