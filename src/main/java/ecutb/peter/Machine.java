@@ -40,11 +40,10 @@ public class Machine implements VendingMachine{
     @Override
     //Nollställa moneypool och returnera det som fanns tillbaka som en int
     public int endSession() {
-        if(moneyPool > 0){
-            return moneyPool;
-        }
+        int change = moneyPool;
+
         moneyPool = 0;
-        return 0;
+        return change;
     }
 
     @Override
@@ -71,7 +70,9 @@ public class Machine implements VendingMachine{
             sb.append(products[i].examine());
             sb.append("\n");
             productsAsString[i] = sb.toString();
+
         }
+//        System.out.println(productsAsString);
         return productsAsString;
     }
 
